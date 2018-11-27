@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Server-Side Event</title>
+<script type="text/javascript">
+function invokeSSE(){
+
+var source = new EventSource('http://localhost/sse.pl');
+source.addEventListener('server-time', function(e) {
+document.getElementById('ticker').innerHTML = e.data + '<br>';
+}, false);
+
+
+source.addEventListener('open', function(e) {
+//Connection Open
+}, false);
+source.addEventListener('error', function(e) {
+if (e.readyState == EventSource.CLOSED) {
+alert("Connection closed");
+}
+}, false);
+}
+</script>
+</head>
+<body onload="invokeSSE()">
+<div id="ticker" name="ticker">
+  [TIME]
+</div>
+</body>
+</html>

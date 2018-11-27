@@ -1,0 +1,199 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix void:     <http://rdfs.org/ns/void#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix org:      <http://www.w3.org/ns/org#> .
+@prefix admingeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
+
+@prefix qb:       <http://purl.org/linked-data/cube#> .
+
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#> .
+@prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#> .
+@prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#> .
+
+@prefix ex-geo:   <http://example.org/geo#> .
+@prefix eg:       <http://example.org/ns#> .
+
+# -- Data Set --------------------------------------------
+
+eg:dataset-le3 a qb:DataSet;
+    dct:title       "Threat Impoirtance"@en;
+    rdfs:label      "Threat Impoirtance"@en;
+    rdfs:comment    "Threat Impoirtance "@en;
+    dct:description "Threat Impoirtance "@en;
+    dct:publisher   eg:organization ;
+    dct:issued      "2010-08-11"^^xsd:date;
+    dct:subject
+        sdmx-subject:3.2 ,      # MOD Risk Cube
+        sdmx-subject:1.4 ,      # Tactical Ops
+        ex-geo:bangladesh;           # Bangladesh
+    qb:structure eg:dsd-le3 ;  
+    sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Year> ;
+    qb:slice eg:slice1, eg:slice2, eg:slice3;
+    .
+
+eg:organization a org:Organization, foaf:Agent;
+    rdfs:label "Example org"@en .    
+        
+# -- Data structure definition ----------------------------
+
+eg:dsd-le3 a qb:DataStructureDefinition;
+    qb:component 
+    # The dimensions
+        [ qb:dimension eg:refThreat;         qb:order 1 ],
+        [ qb:dimension eg:refPeriod;       qb:order 2; qb:componentAttachment qb:Slice ],
+        [ qb:dimension sdmx-dimension:action; qb:order 3; qb:componentAttachment qb:Slice ];
+        
+    # The measure(s)
+    qb:component [ qb:measure eg:threatImportance];
+    
+    # The attributes
+    qb:component [ qb:attribute sdmx-attribute:unitMeasure; 
+                   qb:componentRequired "true"^^xsd:boolean;
+                   qb:componentAttachment qb:DataSet; ] ;
+    
+    # slices
+    qb:sliceKey eg:sliceByThreat ;
+    .
+    
+eg:sliceByThreat a qb:SliceKey;
+    rdfs:label "slice by threat"@en;
+    rdfs:comment "Slice by grouping threats together, fixing action and ops values"@en;
+    qb:componentProperty eg:refPeriod, sdmx-dimension:action ;
+    .
+                   
+# -- Dimensions and measures  ----------------------------
+
+eg:refOperation  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "operation"@en;
+    rdfs:subPropertyOf sdmx-dimension:refTactical;
+    rdfs:range admingeo:Dhaka;
+    .
+
+
+eg:refThreat  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "reference area"@en;
+    rdfs:subPropertyOf sdmx-dimension:refThreat;
+    rdfs:range admingeo:Dhaka;
+    qb:concept sdmx-concept:refThreat ;
+    .
+
+eg:threatImportance  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "Threat Impoirtance"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal ;
+    .
+    
+# -- Observations -----------------------------------------
+
+# Column 1
+    
+eg:slice1 a qb:Slice;
+    qb:sliceStructure  eg:sliceByThreat ;
+    eg:refPeriod               <http://reference.data.gov.uk/id/gregorian-interval/2016-07-01T00:00:00/P3Y> ;
+    sdmx-dimension:action         sdmx-code:action1 ;
+qb:observation tc:01, tc:02, tc:03, tc:04 ;
+    .
+
+tc:01 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Protest" ;                  
+    eg:threatImportance          9 ;
+    .
+    
+tc:02 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Weather" ;                  
+    eg:threatImportance          6 ;
+    .
+
+tc:03 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Traffic" ;                  
+    eg:threatImportance          8 ;
+    .
+
+tc:04 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Festivals" ;
+    eg:threatImportance          7 ;
+    .
+
+# Column 2
+    
+    
+eg:slice2 a qb:Slice;
+    qb:sliceStructure  eg:sliceByThreat ;
+    eg:refPeriod               <http://reference.data.gov.uk/id/gregorian-interval/2016-07-01T08:00:00/P3Y> ;
+    sdmx-dimension:action         sdmx-code:action2 ;
+qb:observation tc:05, tc:06, tc:07, tc:08 ;
+    .
+
+tc:05 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Protest" ;                  
+    eg:threatImportance          6 ;
+    .
+    
+tc:06 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Weather" ;                  
+    eg:threatImportance          8;
+    .
+
+tc:07 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Traffic" ;                  
+    eg:threatImportance           8;
+    .
+
+tc:08 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Festivals" ;
+    eg:threatImportance          3 ;
+    .
+
+# Column 3
+    
+    
+eg:slice3 a qb:Slice;
+    qb:sliceStructure  eg:sliceByThreat ;
+    eg:refPeriod               <http://reference.data.gov.uk/id/gregorian-interval/2016-07-01T16:00:00/P3Y> ;
+    sdmx-dimension:action     sdmx-code:action3 ;
+qb:observation tc:09, tc:10, tc:11, tc:12 ;
+    .
+
+tc:09 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Protest" ;                  
+    eg:threatImportance          3 ;
+    .
+    
+tc:10 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Weather" ;                  
+    eg:threatImportance          4 ;
+    .
+
+tc:11 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Traffic" ;                  
+    eg:threatImportance          8 ;
+    .
+
+tc:12 a qb:Observation;
+    qb:dataSet  eg:dataset-le3 ;
+    eg:refThreat                 "Festivals" ;
+    eg:threatImportance          8;
+    
+
+

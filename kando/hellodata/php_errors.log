@@ -1,0 +1,91 @@
+[03-Dec-2015 15:34:27 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:34:34 UTC] PHP Fatal error:  Call to undefined function prprprprprprprprprintf() in /var/www/html/hellodata/edisonsub.php on line 34
+[03-Dec-2015 15:35:22 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:17
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(17): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 17
+[03-Dec-2015 15:35:26 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:17
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(17): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 17
+[03-Dec-2015 15:35:29 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:35:43 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:35:53 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:37:46 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:17
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(17): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 17
+[03-Dec-2015 15:37:59 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:38:00 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:38:00 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:43:52 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:43:58 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:44:31 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/stream2.php:14
+Stack trace:
+#0 /var/www/html/hellodata/stream2.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/stream2.php on line 14
+[03-Dec-2015 15:44:37 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/stream2.php:14
+Stack trace:
+#0 /var/www/html/hellodata/stream2.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/stream2.php on line 14
+[03-Dec-2015 15:47:17 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/edisonsub.php:14
+Stack trace:
+#0 /var/www/html/hellodata/edisonsub.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/edisonsub.php on line 14
+[03-Dec-2015 15:48:46 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/stream2.php:14
+Stack trace:
+#0 /var/www/html/hellodata/stream2.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/stream2.php on line 14
+[03-Dec-2015 15:48:46 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/stream2.php:14
+Stack trace:
+#0 /var/www/html/hellodata/stream2.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/stream2.php on line 14
+[03-Dec-2015 15:48:47 UTC] PHP Fatal error:  Uncaught exception 'Mosquitto\Exception' with message 'The connection was lost.' in /var/www/html/hellodata/stream2.php:14
+Stack trace:
+#0 /var/www/html/hellodata/stream2.php(14): Mosquitto\Client->loop()
+#1 {main}
+  thrown in /var/www/html/hellodata/stream2.php on line 14

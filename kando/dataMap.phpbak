@@ -1,0 +1,174 @@
+<?php
+include "tweetdata.php";
+include "weatherdata.php";
+include "articledata.php";
+include "wikidata.php";
+include "festivaldata.php";
+include "sportsevents.php";
+include "trafficdata.php";
+include "crimeevents.php";
+include "macsdata.php";
+include "numResults.php";
+
+//echo map("Protest", "indvban");
+//echo map("Weather", "rain");
+//echo map("Traffic", "High");
+//echo map("Festivals", "Eid");
+//echo map("Unknown Crowd", "0948");
+//echo map("High Crime", "Dakshinkhan");
+//echo map("Unrest", "corruption");
+//echo map("Sporting Crowd", "National%20Stadium");
+echo map("Ethnicity", "find");
+function map($threat, $term)
+{
+
+if ($threat == "Protest")
+{
+
+
+$tweets = getTweets($term);
+$val = counter($tweets);
+//get prob
+
+return $val;
+
+}
+
+if ($threat == "Weather")
+{
+$rainProb = rainCheck($term);
+$val = counter($rainProb);
+//get prob
+return $val;
+}
+
+if ($threat == "Traffic")
+{
+$traf = searchTraffic($term);
+$val = counter($traf);
+//get prob
+return $val;
+
+}
+
+if ($threat == "Festivals")
+{
+$fest = searchFestivals($term);
+$val = counter($fest);
+//get prob
+
+return $val;
+
+}
+
+if ($threat == "Unknown Crowd")
+{
+$macs = macsSearch($term);
+//get prob
+$val = counter($macs);
+//get prob
+
+return $val;
+
+
+}
+if ($threat == "High Crime")
+{
+$crime = searchcrime($term);
+$density = getCrimeDensity($crime);
+
+//get prob
+return $density;
+
+}
+if ($threat == "Unrest")
+{
+$unrest = getArticleCount($term);
+//get prob
+$val = counter($unrest);
+//get prob
+
+return $val;
+
+}
+if ($threat == "Sporting Crowd")
+{
+$sports = searchSports($term);
+//get prob
+$dt = date('F j');
+if (strpos($sports, $dt) !== false) {
+    $val = 10;
+}
+else{
+
+$val = 1;
+//get prob
+}
+return $val;
+
+
+}
+
+if ($threat == "Ethnicity")
+{
+$eth = searchWiki("Ethnicity");
+//get prob
+return 1;
+
+
+}
+if ($threat == "UK Interests")
+{
+$inter = getArticleCount("interests");
+//get prob
+return 4;
+
+
+}
+if ($threat == "Monsoon")
+{
+$mons = searchWiki("Monsoon");
+//get prob
+return 8;
+
+
+}
+if ($threat == "Port Access")
+{
+$traf = searchTraffic("port");
+
+//get prob
+return 3;
+
+}
+
+
+
+}
+
+
+
+function counter($dataRes)
+{
+
+$pos = getPOS($dataRes);
+return $pos;
+
+
+}
+
+function getCrimeDensity($crime)
+{
+
+$stringFIND   = "DensityofCrime";
+$stringFINDEND = "geolocation";
+$pos = strpos($crime, $stringFIND);
+$pos = $pos +16;
+$pos1 = strpos($crime, $stringFINDEND);
+$pos2 = $pos1 - $pos-2;
+$out = substr($crime, $pos, $pos2);
+return $out;
+
+}
+
+?>

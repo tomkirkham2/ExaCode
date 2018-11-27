@@ -1,0 +1,11 @@
+<?php
+require('riskCalc.php');
+echo "start ";
+
+
+$write = system("curl -X POST 'http://sig-01.esc.rl.ac.uk:9200/dstl/riskregister' -d '{\"Impact\":\"5\",\"Name\":\"Protest Square\",\"Probability\":0.1, \"RiskID\":72, \"Timestamp\":\"2016-05-05\", \"geo_loc\":\"23.73767,90.39604\"}'", $retval);
+
+
+echo "it was written";
+
+?>

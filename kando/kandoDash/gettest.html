@@ -1,0 +1,15 @@
+<html>
+<body>
+<script>
+$.ajax({
+    url: 'http://localhost/25.php/',
+    success: function (data) {
+        alert(data.results[0].address_components[0].long_name);
+    },
+    error: function (jqXHR, exception) {
+        alert(jqXHR.status);
+    }
+</script>
+</body>
+</html>
+

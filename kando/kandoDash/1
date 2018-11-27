@@ -1,0 +1,42 @@
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "huthwaite";
+$dbname = "Hannover";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+$stamp = time();
+//echo " stamp1 ";
+//echo $stamp;
+$stamp2 = time() - 3600;
+//echo "    --- ";
+//sleep(0.3);
+$sql = "SELECT mac, count(*) AS NUMBER FROM macs WHERE time > $stamp2 GROUP BY mac order by NUMBER";
+$result = $conn->query($sql);
+
+$rows = $result->num_rows;
+
+echo $rows;
+$cnt = 0;
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) { 
+echo " res = ";
+$tt[] = $row;
+echo $tt[$cnt];
+//echo $row;
+$cnt++;
+}
+} else {
+    echo "0";
+}
+
+$conn->close();
+
+?>
