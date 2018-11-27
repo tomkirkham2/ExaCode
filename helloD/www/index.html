@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <style>
+        @-ms-viewport { width: 100vw ; zoom: 100% ; }                           
+        @viewport { width: 100vw ; zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; }                                    
+        @viewport { user-zoom: fixed ; }
+    </style>
+
+    <script src="https://cdn.rawgit.com/ftlabs/fastclick/master/lib/fastclick.js"></script>
+    <link rel="stylesheet" href="css/app.css">
+
+        <link rel="stylesheet" href="http://cdn.app-framework-software.intel.com/2.1/icons.css">
+        <link rel="stylesheet" href="http://cdn.app-framework-software.intel.com/2.1/af.ui.base.css">
+        <link rel="stylesheet" href="http://cdn.app-framework-software.intel.com/2.1/af.ui.css">
+</head>
+<body>
+    
+    <div id="afui">
+        <div id="header">
+        </div>
+        
+        <div id="content">
+            
+            <div id="home" class="panel" data-title="Home" style="text-align: center;">
+                <a class="button" href="#new_feed">Add Feed</a>
+                <br>
+                <a class="button" href="#display_feed">Display Feeds</a>
+            </div>
+            
+            <div class="panel" id="new_feed" data-title="Add Feed">
+                <div class="formGroupHead">Add a new feed URL</div>
+                <form>
+                    <input id="new_feed_url" type="text" placeholder="http://domain.com/feed.xml">
+                    <a class="button" href="javascript:add_url();">Add</a>
+                </form>
+            </div>   
+            
+            <div class="panel" id="display_feed" data-title="Display Feeds">
+            </div>
+            
+            <div class="panel" id="single_feed" data-title="Feed">
+            </div>
+                
+        </div>
+        
+        <div id="navbar">
+            <a href="#" class="icon calendar">Calender</a>
+            <a href="#" class="icon user">Profile</a>
+        </div>
+    </div>
+    
+    
+    <script src="intelxdk.js"></script>         
+    <script src="cordova.js"></script>          
+    <script src="xhr.js"></script>              
+
+    <script src="js/app.js"></script>
+    <script src="js/init-app.js"></script>
+    <script src="js/init-dev.js"></script>
+    
+    <script src="http://cdn.app-framework-software.intel.com/2.1/af.ui.jquery.min.js">       </script>
+    <script src="http://cdn.app-framework-software.intel.com/2.1/appframework.min.js"></script>
+    <script src="http://cdn.app-framework-software.intel.com/2.1/appframework.ui.min.js"></script>
+    
+    <script>
+        var urls = [];
+        
+        function add_url()
+        {
+            var url = document.getElementById("new_feed_url").value;
+            var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+            if (!re.test(url)) 
+            { 
+                intel.xdk.notification.alert("Invalud URL");
+                return false;
+            }
+            
+            if(urls.indexOf(url) == -1)
+            {
+                urls.push(url);   
+                intel.xdk.notification.alert("URL Added", "Done", "Ok");
+            }
+        }
+        
+        $("#display_feed").bind("loadpanel",function(e){
+            var list = '<ul class="list">';
+            
+            for(var count = 0; count < urls.length; count++)
+           {
+               list = list + '<li><a href="javascript:display_single_feed(\'' + urls[count] + '\')">';
+                list = list + urls[count];
+                list = list + '</a></li>';
+            }
+            
+            list = list + '</ul>';
+            
+            document.getElementById("display_feed").innerHTML = list;
+        });
+        
+        function display_single_feed(url)
+        {
+            var list = '<ul class="list">';
+            $.ajax({
+              url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+             dataType : 'json',
+             success  : function (data) {
+               if (data.responseData.feed && data.responseData.feed.entries) {
+                 $.each(data.responseData.feed.entries, function (i, e) {
+                   var title = e.title;
+                    var link = e.link;  
+                    list = list + '<li><a href="javascript:display_post(\'' + link + '\')">';
+                    list = list + title;
+                    list = list + '</a></li>';
+                  });
+                }
+                list = list + '</ul>';
+                document.getElementById("single_feed").innerHTML = list;
+                $.ui.loadContent("#single_feed");
+              }
+            });
+        }
+        
+        function display_post(url)
+        {
+            intel.xdk.device.launchExternal(url);
+        }
+    </script>
+</body>
+</html>
